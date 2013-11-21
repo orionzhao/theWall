@@ -10,8 +10,8 @@ var socketio = require('socket.io');
 //var FacebookStrategy = require('passport-facebook').Strategy;
 
 //Database Models
-//var db = require('./db')
-//var Wall = require('./models/wall').Wall;
+var db = require('./db')
+var Wall = require('./models/wall').Wall;
 
 //Configuration and API Keys
 var globals = require('./globals');
