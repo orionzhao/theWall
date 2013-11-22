@@ -64,6 +64,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //All the application routes
 app.get('/', require('./routes/index').get);
+app.get('/newwall', require('./routes/newwall').get);
+app.get('/wall', require('./routes/wall').get);
 
 //Authentication routes
 app.get('/auth/facebook', passport.authenticate('facebook')); //Let's users login to Facebook
@@ -73,7 +75,6 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-
 //Start server on the correct port number
 var server = http.createServer(app);
 server.listen( globals.PORT, process.env.IP, function(){
@@ -82,4 +83,4 @@ server.listen( globals.PORT, process.env.IP, function(){
 
 //Web Sockets
 var io = socketio.listen(server);
-io.sockets.on('connection', require('./routes/socket').connect )
+io.sockets.on('connection', require('./routes/socket').connect );

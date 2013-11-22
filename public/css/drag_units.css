@@ -1,0 +1,27 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 6, ../sass/drag_units.scss */
+.ui-loader {
+  display: none;
+}
+
+/* line 10, ../sass/drag_units.scss */
+.drag {
+  position: absolute;
+  min-width: 250px;
+  min-height: 250px;
+  background-color: #666;
+  z-index: 5;
+  vertical-align: middle;
+}
+
+/* line 19, ../sass/drag_units.scss */
+.panel {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  margin-top: -200px;
+  background-color: rgba(0, 0, 0, 0.1);
+}

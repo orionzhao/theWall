@@ -18,7 +18,7 @@ exports.connect = function(socket)
         wallid = data.wallid;
         socket.join(wallid);
         
-        getGame(function(wall){
+        getWall(function(wall){
             socket.emit('wall', wall);
         });
     });
@@ -33,8 +33,8 @@ exports.connect = function(socket)
         socket.broadcast.to(wallid).emit('dragitem', data); //Should not be persisted to database
     });
     
-    socket.on('moveitem', function(data){
-        socket.broadcast.to(wallid).emit('moveitem', data);
+    socket.on('updateitem', function(data){
+        socket.broadcast.to(wallid).emit('updateitem', data);
         
         //Persist to database
     });
