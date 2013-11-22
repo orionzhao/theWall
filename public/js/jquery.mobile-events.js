@@ -38,7 +38,7 @@
         settings = {
             swipe_h_threshold: 50,
             swipe_v_threshold: 50,
-            taphold_threshold: 750,
+            taphold_threshold: 300,
             doubletap_int: 500,
 
             touch_capable: ('ontouchstart' in document.documentElement && !isChromeDesktop),

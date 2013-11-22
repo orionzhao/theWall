@@ -3,25 +3,23 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* line 6, ../sass/drag_units.scss */
-.ui-loader {
-  display: none;
+*::selection {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
-/* line 10, ../sass/drag_units.scss */
+/* line 15, ../sass/drag_units.scss */
 .drag {
   position: absolute;
   min-width: 250px;
   min-height: 250px;
-  background-color: #666;
+ 	background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: linear-gradient(to bottom right, #faeB70 0%, #faeb70 50%, #ecd308 100%);
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
   z-index: 5;
   vertical-align: middle;
-}
-
-/* line 19, ../sass/drag_units.scss */
-.panel {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  margin-top: -200px;
-  background-color: rgba(0, 0, 0, 0.1);
+  cursor: move;
 }

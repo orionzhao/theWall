@@ -1,0 +1,10 @@
+body {
+	padding-top: 70px;
+}
+.jumbotron {
+	padding-top: 250px;
+	padding-bottom: 250px;
+	background-image: url('../img/wall_img.jpg');
+	background-size: cover; /* Enlarge image to take up full width */
+	background-attachment: fixed; /* Allow for parallax effect */
+}
