@@ -11,7 +11,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 //Database Models
 var db = require('./db')
-var Item = require('./models/item').Item;
 
 //Configuration and API Keys
 var globals = require('./globals');
@@ -64,7 +63,7 @@ swig.setDefaults({ cache: false });
 app.use(express.static(path.join(__dirname, 'public')));
 
 //All the application routes
-//app.get('/', require('./routes/index').get);
+app.get('/', require('./routes/index').get);
 
 //Authentication routes
 app.get('/auth/facebook', passport.authenticate('facebook')); //Let's users login to Facebook
@@ -82,5 +81,5 @@ server.listen( globals.PORT, process.env.IP, function(){
 });
 
 //Web Sockets
-//var io = socketio.listen(server);
-//io.sockets.on('connection', require('./routes/socket').connect )
+var io = socketio.listen(server);
+io.sockets.on('connection', require('./routes/socket').connect )
