@@ -183,7 +183,7 @@ canvas.addEventListener('mousedown', function (e) {
 canvas.addEventListener('mouseup', function () {
     canvas.removeEventListener('mousemove', move, false);
     
-    //socket.emit("updateitem", { type : 'canvas', id : 'canvas', image : canvas.toDataURL("image/jpg", 0.1) });
+    socket.emit("updateitem", { type : 'canvas', id : 'canvas', image : canvas.toDataURL("image/jpg", 0.1) });
 }, false);
 
 function move(e) {
