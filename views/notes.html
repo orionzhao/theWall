@@ -33,6 +33,7 @@
 					<li class="divider"></li>
 					<li><a id="color-bg" href="#"><span class="glyphicon glyphicon-edit"></span></a></li>
 					<li><a id="color-stroke" href="#"><span class="glyphicon glyphicon-pencil"></span></a></li>
+					<li><a id="bg-pict" href="#"><span class="glyphicon glyphicon-picture"></span></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				    <li><a href="/timeline?id={{WALL_ID}}">History</a></li>
@@ -66,6 +67,16 @@
 		<li><a id="sorange" href="#" onclick="javascript:mycolor='SandyBrown'" style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: SandyBrown ;"></a></li>
     </ul>
 </div>
+<div class="bg-pict subbar-hide">
+	<ul class="nav navbar-nav">
+        <li style="margin: 0;"><a>Background Change</a></a></li>
+        <li class="pictopt"><a class="bg-1" href="#"></a></li>
+		<li class="pictopt"><a class="bg-2" href="#"></a></li>
+		<li class="pictopt"><a class="bg-3" href="#"></a></li>
+		<li class="pictopt"><a class="bg-4" href="#"></a></li>
+		<li class="pictopt"><a class="bg-5" href="#"></a></li>
+    </ul>
+</div>
 <div class="sub subbar subbar-hide">
 	<ul class="sub nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Copy link</a></li>
@@ -74,7 +85,7 @@
     </ul>
 </div>
 		
-<canvas id='sketch'>
+<canvas id='sketch' class="bg-1">
 </canvas>
 
 <div id="container">

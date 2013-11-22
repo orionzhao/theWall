@@ -24,6 +24,15 @@ function update_embeds() {
         });
     });
 }
+
+function getColor($node) {
+    if($node.hasClass('yellow')) return 'yellow';
+    if($node.hasClass('red')) return 'red';
+    if($node.hasClass('blue')) return 'blue';
+    if($node.hasClass('green')) return 'green';
+    if($node.hasClass('orange')) return 'orange';
+}
+
 var activepad;
 // Ready Start
 $(document).ready(function() { 
@@ -71,24 +80,25 @@ $(document).ready(function() {
        if($focus.is("textarea")) {
            var id = $focus.attr('id');
            
-           socket.emit('updateitem', { type : 'note', id : id, text : $focus.val(), x : $focus.parent().css("left"), y : $focus.parent().css("top") });
+           $node = $focus.parent();
+           
+           socket.emit('updateitem', { type : 'note', id : id, text : $focus.val(), x : $node.css("left"), y : $node.css("top"), color : getColor($node) });
            update_embeds();
        }
     });
-
 
 // Create Post Function
   function newpost () {
         var id = makeid();
       
-        createNote(id, Xpos, Ypos);
+        createNote(id, Xpos, Ypos, "", "yellow");
         $("#post-" + id).children("textarea").focus();
     
-        socket.emit('additem', { type : 'note', id : id, text : '', x : Xpos, y : Ypos });
+        socket.emit('additem', { type : 'note', id : id, text : '', x : Xpos, y : Ypos, color : "yellow" });
     }
     
-    function createNote(id, x, y, text) {
-        $("#container").append("<div id='post-" + id + "' class='drag yellow'><textarea id="+ id +" name='title' type='text' placeholder='Post-It Note'></textarea></div>")
+    function createNote(id, x, y, text, color) {
+        $("#container").append("<div id='post-" + id + "' class='drag " + color + "'><textarea id="+ id +" name='title' type='text' placeholder='Post-It Note'></textarea></div>")
         $("#post-" + id).css({
           left: x,
           top: y
@@ -105,19 +115,19 @@ $(document).ready(function() {
 
     socket.on('additem', function (data) {
         if(data.type == 'note') {
-            createNote(data.id, data.x, data.y);
+            createNote(data.id, data.x, data.y, data.text, data.color);
         }
     });
     
     socket.on('updateitem', function (data) {
         if(data.type == 'note') {
-            var note = getObjectById(data.id);
-            $("#" + data.id).val(data.text);
-            $("#" + data.id).parent().css("left", data.x).css("top", data.y);
+            var $note = $("#" + data.id);
+            $note.val(data.text);
+            $note.parent().animate( { "left" : data.x, "top" : data.y }, 100);
             
-            //note.text = data.text;
-            //note.x = data.x;
-            //note.y = data.y;
+            $note.parent().removeClass("yellow red blue green orange");
+            $note.parent().addClass(data.color);
+            
         }
         
         update_embeds();
@@ -129,7 +139,7 @@ $(document).ready(function() {
       
       $.each(state, function(index, item) {
          if(item.type == 'note') {
-             createNote(item.id, item.x, item.y, item.text);
+             createNote(item.id, item.x, item.y, item.text, item.color);
          } 
          if(item.type == 'canvas') {
              var image = new Image();
@@ -173,7 +183,7 @@ canvas.addEventListener('mousedown', function (e) {
 canvas.addEventListener('mouseup', function () {
     canvas.removeEventListener('mousemove', move, false);
     
-    socket.emit("updateitem", { type : 'canvas', id : 'canvas', image : canvas.toDataURL("image/jpg", 0.1) });
+    //socket.emit("updateitem", { type : 'canvas', id : 'canvas', image : canvas.toDataURL("image/jpg", 0.1) });
 }, false);
 
 function move(e) {
@@ -242,11 +252,7 @@ $.fn.drags = function(opt) {
                 console.log(activepad);
                 
                 var id = $(this).children("textarea").attr('id');
-                //var note = getObjectById(id);
-                //note.x = $(this).css("left");
-                //note.y = $(this).css("top");
-                
-                socket.emit('updateitem', { type : 'note', id : id, text : $(this).children("textarea").val(), x : $(this).css("left"), y : $(this).css("top") });
+                socket.emit('updateitem', { type : 'note', id : id, text : $(this).children("textarea").val(), x : $(this).css("left"), y : $(this).css("top"), color : getColor($(this)) });
 
             } else {
                 $(this).removeClass('active-handle').parent().removeClass('draggable');
@@ -285,11 +291,7 @@ $.fn.drags = function(opt) {
 //         break;
 //     case 4:
 //         zoom--;
-    
 // }
-
-
-
 //};
 
 $("#cog").mouseover(
@@ -304,11 +306,16 @@ $("#color-stroke").mouseover(
     function() {
     $(".subbar-stroke").removeClass("subbar-hide");
     });
+$("#bg-pict").mouseover(
+    function() {
+    $(".bg-pict").removeClass("subbar-hide");
+    });
 $("canvas").mouseover(
     function() {
     $(".subbar-bg").addClass("subbar-hide");
     $(".subbar-stroke").addClass("subbar-hide");
     $(".subbar").addClass("subbar-hide");
+    $(".bg-pict").addClass("subbar-hide");
     });
 
 // BG Color Change
@@ -316,13 +323,15 @@ $(".bgopt").tap(function() {
     var newcolor = $(this).find("a").attr("id");
     $("#" + activepad).removeClass("yellow red blue green orange");
     $("#" + activepad).addClass(newcolor);
+    
+    $note = $("#" + activepad);
+    socket.emit('updateitem', { type : 'note', id : $note.children("textarea").attr('id'), text : $note.children("textarea").val(), x : $note.css("left"), y : $note.css("top"), color : newcolor });
 })
 
-
+$(".pictopt").tap(function() {
+    var newbg = $(this).find("a").attr("class");
+    $("canvas").removeClass("bg-1 bg-2 bg-3 bg-4 bg-5");
+    $("canvas").addClass(newbg);
+});
 // End
 });
-
-
-
-
-

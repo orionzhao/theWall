@@ -34,25 +34,53 @@
 	background-image: linear-gradient(to bottom right, salmon 0%, salmon 50%, #ff692e 100%);
 }
 .green {
-    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
-	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
-	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
-	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
-	background-image: linear-gradient(to bottom right, #faeB70 0%, olive 50%, #676700 100%);
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #CCCC00), color-stop(50%, #CCCC00), color-stop(100%, #b3b300));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #CCCC00), color-stop(50%, #CCCC00), color-stop(100%, #b3b300));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #CCCC00), color-stop(50%, #CCCC00), color-stop(100%, #b3b300));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #CCCC00), color-stop(50%, #CCCC00), color-stop(100%, #b3b300));
+	background-image: linear-gradient(to bottom right, #CCCC00 0%, #CCCC00 50%, #b3b300 100%);
 }
 .blue {
-    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: linear-gradient(to bottom right, #faeB70 0%, #faeb70 50%, #ecd308 100%);
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #1E90FF), color-stop(50%, #1E90FF), color-stop(100%, #1b81e5));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #1E90FF), color-stop(50%, #1E90FF), color-stop(100%, #1b81e5));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #1E90FF), color-stop(50%, #1E90FF), color-stop(100%, #1b81e5));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #1E90FF), color-stop#1E90FF, color-stop(100%, #1b81e5));
+	background-image: linear-gradient(to bottom right, #1E90FF 0%, #1E90FF 50%, #1b81e5 100%);
 }
 .orange {
-    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
-	background-image: linear-gradient(to bottom right, #faeB70 0%, #faeb70 50%, #ecd308 100%);
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #f4a460), color-stop(50%, #f4a460), color-stop(100%, #f29240));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #f4a460), color-stop(50%, #f4a460), color-stop(100%, #f29240));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #f4a460), color-stop(50%, #f4a460), color-stop(100%, #f29240));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #f4a460), color-stop(50%, #f4a460), color-stop(100%, #f29240));
+	background-image: linear-gradient(to bottom right, #f4a460 0%, #f4a460 50%, #f29240 100%);
+}
+
+.pictopt>a {
+    margin: auto; 
+    width: 2.5vh; 
+    height: 2.5vh; 
+    background-size: cover;
+}
+
+.bg-1 {
+    background-image: url('http://www.inkspotcreative.com/wp-content/uploads/2013/07/Wood-Grain-Backgrounds-1.jpg'); 
+    -webkit-filter: saturate(60%);
+}
+
+.bg-2 {
+    background-image: url('http://i.imgur.com/TT16s.jpg'); 
+}
+
+.bg-3 {
+    background-image: url(http://i.imgur.com/TqjVJMT.jpg); 
+}
+
+.bg-4 {
+    background-image: url('http://cdn.superbwallpapers.com/wallpapers/minimalistic/blurred-wall-14634-1680x1050.jpg'); 
+}
+
+.bg-5 {
+    background-image: url('http://img.wallpaperstock.net:81/blurred-colors-wallpapers_35088_2560x1600.jpg'); 
 }
 
 .navbar-brand, .navbar-header, .navbar-header>a {
@@ -89,7 +117,7 @@
 
 
 
-.subbar, .subbar-bg, .subbar-stroke {
+.subbar, .subbar-bg, .subbar-stroke, .bg-pict {
     height: 10vh; 
     width: 100%;
     position: absolute; 

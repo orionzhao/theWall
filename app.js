@@ -11,6 +11,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 //Database Models
 var db = require('./db')
+var Wall = require('./models').Wall;
 
 //Configuration and API Keys
 var globals = require('./globals');
@@ -67,6 +68,13 @@ app.get('/', require('./routes/index').get);
 app.get('/newwall', require('./routes/newwall').get);
 app.get('/wall', require('./routes/wall').get);
 app.get('/timeline', require('./routes/timeline').get);
+
+app.get('/clear', function(req, res){
+    Wall.remove({}, function(err) { 
+       console.log('collection removed') 
+       res.redirect('/');
+    });
+});
 
 //Authentication routes
 app.get('/auth/facebook', passport.authenticate('facebook')); //Let's users login to Facebook

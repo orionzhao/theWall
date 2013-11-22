@@ -16,18 +16,16 @@ function update_embeds() {
     });
 }
 
-function createNote(id, x, y, text) {
-    $("#container").append("<div id='post-" + id + "' class='drag ui-widget-content'><textarea id="+ id +" name='title' type='text' placeholder='Post-It Note'></textarea></div>")
-    $("#post-" + id).css({
-      left: x,
-      top: y
-    });
-    
-    if(text)
-        $("#post-" + id).children("textarea").val(text);
+    function createNote(id, x, y, text, color) {
+        $("#container").append("<div id='post-" + id + "' class='drag " + color + "'><textarea id="+ id +" name='title' type='text' placeholder='Post-It Note'></textarea></div>")
+        $("#post-" + id).css({
+          left: x,
+          top: y
+        });
         
-    $("#post-" + id).children("textarea").focus();
-}
+        if(text)
+            $("#post-" + id).children("textarea").val(text);
+    }
 
 function noteinlist(id, list) {
     for(var i = 0; i < list.length; ++i) {
@@ -59,9 +57,12 @@ function settime() {
                 if($note.size() > 0) { //This is a modification from the current state
                     $("#" + item.id).val(item.text);
                     $("#" + item.id).parent().animate( { "left" : item.x, "top" : item.y }, 100);
+                    
+                    $("#" + item.id).parent().removeClass("yellow red blue green orange");
+                    $("#" + item.id).parent().addClass(item.color);
                 }
                 else { //You need to add it from the current state
-                    createNote(item.id, item.x, item.y, item.text);
+                    createNote(item.id, item.x, item.y, item.text, item.color);
                 }
             }
             if(item.type == 'canvas') {
