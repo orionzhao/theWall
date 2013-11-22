@@ -6,12 +6,12 @@ var swig = require('swig');
 var socketio = require('socket.io');
 
 //Authentication libraries
-//var passport = require('passport');
-//var FacebookStrategy = require('passport-facebook').Strategy;
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 //Database Models
 var db = require('./db')
-var Wall = require('./models/wall').Wall;
+var Item = require('./models/item').Item;
 
 //Configuration and API Keys
 var globals = require('./globals');
@@ -27,9 +27,29 @@ app.use(express.favicon()); //Favicon
 app.use(express.cookieParser()); //Parsing cookies
 app.use(express.session({ secret: globals.SESSION_TOKEN }));
 
+//Serializing and deserializing the user - used by passport
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+    done(null. user);
+});
+
+//Passport Facebook Strategy
+passport.use(new FacebookStrategy({
+        clientID: globals.FACEBOOK_APP_ID,
+        clientSecret: globals.FACEBOOK_APP_SECRET,
+        callbackURL: globals.APP_URL + "/auth/facebook/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        console.log(profile);
+        done(profile);
+    }
+));
+
 //Passport middleware
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //App router
 app.use(app.router);
@@ -44,10 +64,20 @@ swig.setDefaults({ cache: false });
 app.use(express.static(path.join(__dirname, 'public')));
 
 //All the application routes
+//app.get('/', require('./routes/index').get);
+
+//Authentication routes
+app.get('/auth/facebook', passport.authenticate('facebook')); //Let's users login to Facebook
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' })); //Facebook redirects users here after they log in
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 
 //Start server on the correct port number
 var server = http.createServer(app);
-server.listen( globals.PORT, function(){
+server.listen( globals.PORT, process.env.IP, function(){
   console.log('Express server listening on port ' + globals.PORT);
 });
 
