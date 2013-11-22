@@ -10,7 +10,8 @@ exports.connect = function(socket)
     
     function getWall(callback) {
         Wall.findById(wallid, function(err, wall) {
-            callback(wall);
+            if(wall)
+                callback(wall);
         });
     }
     
@@ -37,20 +38,32 @@ exports.connect = function(socket)
         });
     });
     
-    socket.on('dragitem', function(data){
-        socket.broadcast.to(wallid).emit('dragitem', data); //Should not be persisted to database
+    socket.on('draw', function(data){
+        socket.broadcast.to(wallid).emit('draw', data); //Should not be persisted to database
     });
     
     socket.on('updateitem', function(data){
         getWall(function(wall){
             var newstate = JSON.parse(JSON.stringify(wall.history[wall.history.length - 1]));
             
+            //Canvases store an index of a unique imageview
+            if(data.type == 'canvas') {
+                wall.canvases.push(data.image);
+                data.image = wall.canvases.length - 1;
+            }
+            
+            var changed = false;
             for(var i = 0; i < newstate.length; ++i) {
                 if(newstate[i].id == data.id) {
                     newstate[i] = data;
+                    changed = true;
                     break;
                 }
             }
+            if(!changed) {
+                newstate.push( data ); //Add the new item
+            }
+            
             
             wall.history.push(newstate);
             

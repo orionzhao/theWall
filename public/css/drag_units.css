@@ -11,15 +11,109 @@
 /* line 15, ../sass/drag_units.scss */
 .drag {
   position: absolute;
-  min-width: 250px;
-  min-height: 250px;
- 	background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+  min-width: 200px;
+  min-height: 200px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  z-index: 5;
+  vertical-align: middle;
+  cursor: move;
+}
+
+.yellow {
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
 	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
 	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
 	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
 	background-image: linear-gradient(to bottom right, #faeB70 0%, #faeb70 50%, #ecd308 100%);
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  z-index: 5;
-  vertical-align: middle;
-  cursor: move;
+}
+.red {
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, salmon), color-stop(50%, salmon), color-stop(100%, #ff692e));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, salmon), color-stop(50%, salmon), color-stop(100%, #ff692e));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, salmon), color-stop(50%, salmon), color-stop(100%, #ff692e));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, salmon), color-stop(50%, salmon), color-stop(100%, #ff692e));
+	background-image: linear-gradient(to bottom right, salmon 0%, salmon 50%, #ff692e 100%);
+}
+.green {
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, olive), color-stop(50%, olive), color-stop(100%, #676700));
+	background-image: linear-gradient(to bottom right, #faeB70 0%, olive 50%, #676700 100%);
+}
+.blue {
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: linear-gradient(to bottom right, #faeB70 0%, #faeb70 50%, #ecd308 100%);
+}
+.orange {
+    background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -webkit-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -moz-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: -o-linear-gradient(top left, bottom right, color-stop(0%, #faeB70), color-stop(50%, #faeb70), color-stop(100%, #ecd308));
+	background-image: linear-gradient(to bottom right, #faeB70 0%, #faeb70 50%, #ecd308 100%);
+}
+
+.navbar-brand, .navbar-header, .navbar-header>a {
+    font-size: 100%;
+    padding: 1vh;
+}
+.navbar {
+    height: 5vh;
+    font-size: 100%;
+}
+
+.navbar-brand, .navbar-nav, li>a, .navbar-nav>li>a {
+    font-size: 100%;
+    padding: 1vh 2vh;
+    line-height: 100%;
+    
+}
+
+.preview {
+    margin-top: -60px;
+    position: relative;
+    padding-bottom: 200px;
+}
+
+.preview>div {
+    position: absolute;
+    width: 200px;
+    min-height: 200px;
+    background-size: cover;
+    background-position: center;
+    margin-top: -50px;
+    padding-bottom: 25px;
+}
+
+
+
+.subbar, .subbar-bg, .subbar-stroke {
+    height: 10vh; 
+    width: 100%;
+    position: absolute; 
+    z-index: 1000; 
+    background-color: #e2e2e2;
+    margin-top: 0;
+    padding-top: 5vh;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.subbar-bg li, .subbar-stroke li {
+    margin: 5px;
+}
+
+.subbar-hide {
+    margin-top: -10vh;
+}
+
+#slider {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 200px;
 }

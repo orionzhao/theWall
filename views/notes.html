@@ -3,15 +3,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="description" content="">
-  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Drag Units</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/wall.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/drag_units.css">
 	<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-
 </head>
 <body>
 
@@ -23,34 +23,20 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">HackWall</a>
+				<a class="navbar-brand" href="#" style="font-family: Permenant Marker">HackWall</a>
 			</div>
 			<div class="collapse navbar-collapse" id="NAVBAR_STUFF">
 				<ul class="nav navbar-nav">
-					<li class="divider"></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">WALL_NAME <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#"><span class="glyphicon glyphicon-share"></span> Share</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Copy link</a></li>
-						</ul>
+					<li style="padding-top: 5px;">
+						<input type="text" placeholder="WALL NAME">
 					</li>
 					<li class="divider"></li>
-					<li><a href="#"><span class="glyphicon glyphicon-pushpin"></span></a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-paperclip"></span> <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#"><span class="glyphicon glyphicon-link"></span> Link</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-picture"></span> Photo</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-film"></span> Video</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-music"></span> Audio</a></li>
-						</ul>
-					</li>
+					<li><a id="color-bg" href="#"><span class="glyphicon glyphicon-edit"></span></a></li>
+					<li><a id="color-stroke" href="#"><span class="glyphicon glyphicon-pencil"></span></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-					<li class="divider"></li>
+				    <li><a href="/timeline?id={{WALL_ID}}">History</a></li>
+					<li><a id="cog" href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-qrcode"></span></a>
 						<ul class="dropdown-menu">
@@ -60,20 +46,45 @@
 				</ul>
 			</div>
 		</nav>
+<div class="subbar-bg subbar-hide">
+	<ul class="nav navbar-nav">
+        <li style="margin: 0;"><a>Pad Color</a></li>
+        <li class="bgopt"><a id="yellow" href="#" style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: #faeB70;"></a></li>
+		<li class="bgopt"><a id="red" href="#"style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: salmon;"></a></li>
+		<li class="bgopt"><a id="green" href="#"style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: olive;"></a></li>
+		<li class="bgopt"><a id="blue" href="#"style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: DodgerBlue ;"></a></li>
+		<li class="bgopt"><a id="orange" href="#"style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: SandyBrown ;"></a></li>
+    </ul>
+</div>
+<div class="subbar-stroke subbar-hide">
+	<ul class="nav navbar-nav">
+        <li style="margin: 0;"><a>Stroke Color</a></li>
+        <li><a id="syellow" href="#" onclick="javascript:mycolor='#faeB70'" style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: #faeB70;"></a></li>
+		<li><a id="sred" href="#" onclick="javascript:mycolor='salmon'" style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: salmon;"></a></li>
+		<li><a id="sgreen" href="#" onclick="javascript:mycolor='olive'" style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: olive;"></a></li>
+		<li><a id="sblue" href="#" onclick="javascript:mycolor='DodgerBlue'" style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: DodgerBlue ;"></a></li>
+		<li><a id="sorange" href="#" onclick="javascript:mycolor='SandyBrown'" style="margin: auto; width: 2.5vh; height: 2.5vh; background-color: SandyBrown ;"></a></li>
+    </ul>
+</div>
+<div class="sub subbar subbar-hide">
+	<ul class="sub nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-floppy-disk"></span> Copy link</a></li>
+		<li><a href="#"><span class="glyphicon glyphicon-share"></span> Share</a></li>
+		<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+</div>
 		
-<canvas></canvas>
+<canvas id='sketch'>
+</canvas>
 
 <div id="container">
 </div>
 
 
-
-
-
-
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="js/jquery-ui-1.10.3.custom.js"></script>
 <script src="js/jquery.mobile-events.js"></script>
+<script src="https://cdn.embed.ly/jquery.embedly-3.1.1.min.js" type="text/javascript"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-url-parser/2.3.1/purl.min.js"></script>
 

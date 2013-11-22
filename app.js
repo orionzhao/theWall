@@ -66,6 +66,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', require('./routes/index').get);
 app.get('/newwall', require('./routes/newwall').get);
 app.get('/wall', require('./routes/wall').get);
+app.get('/timeline', require('./routes/timeline').get);
 
 //Authentication routes
 app.get('/auth/facebook', passport.authenticate('facebook')); //Let's users login to Facebook
