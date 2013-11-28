@@ -4,8 +4,8 @@ var async = require('async');
 Schema = db.mongoose.Schema;
 
 var wallSchema = new Schema({
-    history : [Schema.Types.Mixed],
-    canvases : [String]
+    items : [Schema.Types.Mixed],
+    canvas : String
 });
 
 exports.Wall = db.mongoose.model('Wall', wallSchema);

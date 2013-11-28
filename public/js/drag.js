@@ -135,18 +135,18 @@ $(document).ready(function() {
   
   socket.on('wall', function (data) {
       wall = data;
-      var state = wall.history[wall.history.length - 1];
       
-      $.each(state, function(index, item) {
+      $.each(wall.items, function(index, item) {
          if(item.type == 'note') {
              createNote(item.id, item.x, item.y, item.text, item.color);
          } 
-         if(item.type == 'canvas') {
-             var image = new Image();
-             image.src = wall.canvases[ item.image ];
-             context.drawImage(image, 0, 0);
-         }
       });
+      
+	if(wall.canvas) {
+		var image = new Image();
+		image.src = wall.canvas;
+		context.drawImage(image, 0, 0);
+	}
      
      update_embeds();
   });

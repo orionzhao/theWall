@@ -2,8 +2,8 @@ var db = require('./../db');
 
 var Wall = require('./../models').Wall;
 
-exports.connect = function(socket)
-{
+exports.connect = function(socket) {
+	
     console.log('A socket has connected.');
     
     var wallid;
@@ -26,12 +26,10 @@ exports.connect = function(socket)
     
     socket.on('additem', function(data){
         getWall(function(wall){
-            var newstate = JSON.parse(JSON.stringify(wall.history[wall.history.length - 1])); //Copy the current state
-            newstate.push( data ); //Add the new item
-            wall.history.push(newstate); //Push the new wall state
+            wall.items.push( data ); //Push into the wall state
             
             //Persist to database
-            wall.markModified('history');
+            wall.markModified('items');
             wall.save(function(err) {
                 socket.broadcast.to(wallid).emit('additem', data); //Broadcast client
             });
@@ -44,31 +42,26 @@ exports.connect = function(socket)
     
     socket.on('updateitem', function(data){
         getWall(function(wall){
-            var newstate = JSON.parse(JSON.stringify(wall.history[wall.history.length - 1]));
-            
             //Canvases store an index of a unique imageview
             if(data.type == 'canvas') {
-                wall.canvases.push(data.image);
-                data.image = wall.canvases.length - 1;
+                wall.canvas = data.image;
             }
-            
-            var changed = false;
-            for(var i = 0; i < newstate.length; ++i) {
-                if(newstate[i].id == data.id) {
-                    newstate[i] = data;
-                    changed = true;
-                    break;
-                }
-            }
-            if(!changed) {
-                newstate.push( data ); //Add the new item
-            }
-            
-            
-            wall.history.push(newstate);
-            
+            else {
+	            var changed = false;
+	            for(var i = 0; i < wall.items.length; ++i) {
+	                if(wall.items[i].id == data.id) {
+	                    wall.items[i] = data;
+	                    changed = true;
+	                    break;
+	                }
+	            }
+	            if(!changed) {
+	                wall.items.push( data ); //Add the new item
+	            }
+	        }
+	        
             //Persist to database
-            wall.markModified('history');
+            wall.markModified('items');
             wall.save(function(err) {
                 socket.broadcast.to(wallid).emit('updateitem', data); //Broadcast client
             });
@@ -78,20 +71,16 @@ exports.connect = function(socket)
     
     socket.on('deleteitem', function(data){
         getWall(function(wall){
-            
-            var newstate = JSON.parse(JSON.stringify(wall.history[wall.history.length - 1]));
-                
-            for(var i = 0; i < newstate.length; ++i) {
-                if(newstate[i].id == data.id) {
-                    newstate.splice(i, 1);
+             
+            for(var i = 0; i < wall.items.length; ++i) {
+                if(wall.items[i].id == data.id) {
+                    wall.items.splice(i, 1);
                     break;
                 }
             }
             
-            wall.history.push(newstate);
-            
             //Persist to database
-            wall.markModified('history');
+            wall.markModified('items');
             wall.save(function(err) {
                 socket.broadcast.to(wallid).emit('deleteitem', data); //Broadcast client
             });
