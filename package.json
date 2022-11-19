@@ -6,18 +6,16 @@
     "start": "node app.js"
   },
   "dependencies": {
-	"async": "*",
-  "express": "*",
-  "swig": "*",
-	"passport": "*",
-	"passport-facebook": "*",
-	"socket.io": "*",
-	"mongoose" : "*",
-	"request" : "*",
-	"redis" : "*"
+    "async": "0.2.9",
+    "express": "3.0.0",
+    "swig": "1.0.0",
+    "socket.io": "^1",
+    "mongoose": "^4",
+    "request": "2.21.0",
+    "redis": "0.8.3"
   },
   "engines": {
-	"node": "0.10.x",
-	"npm": "1.3.x"
+    "node": "0.10.x",
+    "npm": "1.3.x"
   }
 }

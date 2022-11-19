@@ -5,10 +5,6 @@ var path = require('path');
 var swig = require('swig');
 var socketio = require('socket.io');
 
-//Authentication libraries
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-
 //Database Models
 var db = require('./db')
 var Wall = require('./models').Wall;
@@ -26,30 +22,6 @@ app.use(express.favicon()); //Favicon
 //Needed for user sessions
 app.use(express.cookieParser()); //Parsing cookies
 app.use(express.session({ secret: globals.SESSION_TOKEN }));
-
-//Serializing and deserializing the user - used by passport
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-passport.deserializeUser(function(user, done) {
-    done(null. user);
-});
-
-//Passport Facebook Strategy
-passport.use(new FacebookStrategy({
-        clientID: globals.FACEBOOK_APP_ID,
-        clientSecret: globals.FACEBOOK_APP_SECRET,
-        callbackURL: globals.APP_URL + "/auth/facebook/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-        console.log(profile);
-        done(profile);
-    }
-));
-
-//Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 //App router
 app.use(app.router);
@@ -74,14 +46,6 @@ app.get('/clear', function(req, res){
        console.log('collection removed') 
        res.redirect('/');
     });
-});
-
-//Authentication routes
-app.get('/auth/facebook', passport.authenticate('facebook')); //Let's users login to Facebook
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' })); //Facebook redirects users here after they log in
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
 });
 
 //Start server on the correct port number

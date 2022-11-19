@@ -63,7 +63,7 @@
 }
 
 .bg-1 {
-    background-image: url('http://www.inkspotcreative.com/wp-content/uploads/2013/07/Wood-Grain-Backgrounds-1.jpg'); 
+    background-image: url('../img/wood-grain.jpg'); 
     -webkit-filter: saturate(60%);
 }
 
@@ -76,11 +76,11 @@
 }
 
 .bg-4 {
-    background-image: url('http://cdn.superbwallpapers.com/wallpapers/minimalistic/blurred-wall-14634-1680x1050.jpg'); 
+    background-image: url('http://cdn.superbwallpapers.com/wallpapers/minimalistic/blurred-wall-14634-1680x1050.jpg');
 }
 
 .bg-5 {
-    background-image: url('http://img.wallpaperstock.net:81/blurred-colors-wallpapers_35088_2560x1600.jpg'); 
+    background-image: url('../img/blurred-colors.jpg'); 
 }
 
 .navbar-brand, .navbar-header, .navbar-header>a {

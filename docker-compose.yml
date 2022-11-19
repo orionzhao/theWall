@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  web:
+    environment:
+      - MONGODB_URL=mongodb://db:27017/thewall
+      - SESSION_TOKEN=DEVELOPMENT_SESSION_TOKEN
+    depends_on:
+      - db
+    build: .
+    ports:
+      - 3000:80
+  db:
+    image: mongo:3
+    restart: always
+    ports:
+      - 27017:27017
