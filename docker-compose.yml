@@ -4,6 +4,7 @@ services:
     environment:
       - MONGODB_URL=mongodb://db:27017/thewall
       - SESSION_TOKEN=DEVELOPMENT_SESSION_TOKEN
+      - URL=http://localhost:3000
     depends_on:
       - db
     build: .
